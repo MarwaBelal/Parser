@@ -1,0 +1,39 @@
+program -> decl_list
+decl_list -> decl K
+K -> decl K | empty
+decl -> var_decl | fun_decl
+var_decl -> type_spec ID A ; 
+type_spec -> VOID | BOOL | INT | FLOAT
+fun_decl -> type_spec ID ( params ) compound_stmt
+params -> param_list | VOID
+param_list -> F param 
+param -> type_spec ID A
+stmt_list -> L
+L -> stmt L | empty
+stmt -> expr_stmt | compound_stmt | if_stmt | while_stmt | return_stmt | break_stmt
+while_stmt -> WHILE G stmt
+compound_stmt -> { local_decls stmt_list }
+local_decls -> M 
+M -> local_decl M | empty
+local_decl -> type_spec ID A ;
+if_stmt -> IF G stmt B
+return_stmt -> RETURN expr_stmt ;
+expr -> ID E = expr
+		-> expr C
+		-> H expr
+		-> G
+		-> ID D 
+		-> BOOL_LIT | INT_LIT | FLOAT_LIT | NEW type_spec E
+args -> arg_list | empty
+A -> [ ] | empty
+B -> ELSE stmt | empty
+C -> I expr 
+arg_list -> J expr
+D -> E | (args) | . size | empty
+expr_stmt -> expr | empty
+E -> [ expr ] | empty
+F -> param_list , | empty
+G -> ( expr )
+H -> ! | - | +
+I -> OR | EQ | NE | LE | < | GE | > | AND | + | - | * | / | %
+J -> arg_list , | empty
